@@ -7,6 +7,31 @@
     <link href="style.css" rel="stylesheet" type="text/css">
   </head>
   <body>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Pages</th>
+          <th>Read?</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="books-list">
+      </tbody>
+    </table>
+
+    <button id="show-form-button">New book</button>
+
+    <form id="add-book-form" class="hidden">
+      <input type="text" id="title" name="title" placeholder="Title">
+      <input type="text" id="author" name="author" placeholder="Author">
+      <input type="number" id="pages" name="pages" placeholder="Pages">
+      <label for="read">Already read?</label>
+      <input type="checkbox" id="read" name="read">
+      <input type="submit" value="Add book">
+    </form>
+
     <script src="script.js"></script>
   </body>
 </html>
