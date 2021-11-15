@@ -43,7 +43,8 @@ preloadBooks(defaultBooks)
 
 // Functionality
 showFormButton.addEventListener('click', () => {
-  addBookForm.classList.toggle("hidden")
+  addBookForm.classList.toggle("d-none")
+  showFormButton.classList.toggle("d-none")
 })
 
 addBookForm.addEventListener('submit', (event) => {
@@ -58,7 +59,8 @@ addBookForm.addEventListener('submit', (event) => {
   addBookToLibrary(book)
 
   event.target.reset()
-  addBookForm.classList.toggle("hidden")
+  addBookForm.classList.toggle("d-none")
+  showFormButton.classList.toggle("d-none")
 })
 
 
@@ -100,10 +102,12 @@ function addBookToTable(book, rowIndex) {
   const row = booksList.insertRow(rowIndex)
   for (const [index, [key, value]] of Object.entries(Object.entries(book))) {
     let cell = row.insertCell(index)
+    cell.classList.add('align-middle')
 
     if (key === 'read') {
       addReadButton(cell, value, rowIndex)
     } else {
+      if (key == 'pages') { cell.classList.add('text-center') }
       cell.innerHTML = value
     }
   }
@@ -112,6 +116,7 @@ function addBookToTable(book, rowIndex) {
 
 function addReadButton(cell, value, index) {
   cell.innerHTML = value ? '✓' : '✗'
+  cell.classList.add('text-center')
   cell.addEventListener('click', () => {
     toggleReadByIndex(index)
   })
@@ -124,13 +129,16 @@ function toggleReadByIndex(index) {
 }
 
 function addDeleteButton(row, index) {
+  let td = row.insertCell()
+  td.classList.add('text-center')
   let button = document.createElement('input')
   button.type = "button"
   button.value = "Remove"
+  button.classList.add("btn", "btn-danger")
   button.addEventListener('click', () => {
     removeBookFromLibraryByIndex(index)
   })
-  row.appendChild(button)
+  td.appendChild(button)
 }
 
 function removeBookFromLibraryByIndex(index) {
