@@ -4,6 +4,20 @@ const showFormButton = document.querySelector('#show-form-button');
 const addBookForm = document.querySelector('#add-book-form');
 let myLibrary = [];
 
+// Classes
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+
+  toggleRead() {
+    this.read = !this.read;
+  }
+}
+
 // Choose preloaded books
 const defaultBooks = [
   {
@@ -62,17 +76,6 @@ addBookForm.addEventListener('submit', (event) => {
 });
 
 // Functions
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-
-Book.prototype.toggleRead = function () {
-  this.read = !this.read;
-};
-
 function preloadBooks(defaultBooks) {
   let storedLibrary = JSON.parse(localStorage.getItem('myLibrary'));
   let preloadedBooks = storedLibrary === null ? defaultBooks : storedLibrary;
